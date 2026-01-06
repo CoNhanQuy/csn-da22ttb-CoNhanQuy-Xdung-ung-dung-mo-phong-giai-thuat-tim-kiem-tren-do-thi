@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô phỏng BFS/DFS - DA22TTB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h2>Điều khiển</h2>
+            
+            <button onclick="resetAll()" class="btn-reset">🧹 Xóa / Tạo Mới</button>
+            
+            <div class="algo-buttons">
+                <button onclick="startVisualizing('bfs')" class="btn-run bfs">Chạy BFS (Lan rộng)</button>
+                <button onclick="startVisualizing('dfs')" class="btn-run dfs">Chạy DFS (Sâu)</button>
+                <button onclick="startCompare()" class="btn-run compare">⚡ So sánh cả 2</button>
+            </div>
+            
+            <div class="legend">
+                <h4>Chú thích & Thao tác:</h4>
+                <div class="item"><span class="box start"></span> Điểm đầu (Kéo để di chuyển)</div>
+                <div class="item"><span class="box end"></span> Điểm đích (Kéo để di chuyển)</div>
+                <div class="item"><span class="box wall"></span> Tường (Nhấn giữ chuột để vẽ)</div>
+                <div class="item"><span class="box visited-bfs"></span> BFS đã duyệt</div>
+                <div class="item"><span class="box visited-dfs"></span> DFS đã duyệt</div>
+                <div class="item"><span class="box path"></span> Đường đi ngắn nhất</div>
+            </div>
+
+            <div class="matrix-input-section">
+                <hr style="border-color: #30363d; margin: 15px 0;">
+                <h3>Nhập Ma Trận (0/1)</h3>
+                <textarea id="matrixInput" placeholder="Ví dụ:
+0 0 1 0 0
+0 1 0 0 0
+0 0 0 1 0"></textarea>
+                <button onclick="applyMatrix()" class="btn-matrix">Mô phỏng từ Ma trận</button>
+            </div>
+            
+            <p id="status" style="color: #ff7b72; font-style: italic;">Sẵn sàng...</p>
+        </div>
+
+        <div class="grids-wrapper" id="gridsWrapper">
+            <div class="grid-box">
+                <h3 id="label1">Bảng chính</h3>
+                <div class="grid-container" id="grid1"></div>
+            </div>
+
+            <div class="grid-box hidden" id="box2">
+                <h3>DFS Algorithm</h3>
+                <div class="grid-container" id="grid2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

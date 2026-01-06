@@ -1,0 +1,163 @@
+body {
+    background-color: #fdf5e6; /* Nền màu KEM (Old Lace) */
+    color: #2c3e50; /* Chữ màu xanh đen đậm cho dễ đọc */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff; /* Khung trắng để nổi bật trên nền kem */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05); /* Bóng đổ mềm */
+    border: 1px solid #e0e0e0;
+    max-width: 98vw;
+}
+
+.controls {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto; 
+    max-height: 90vh;
+}
+
+h2 { margin-top: 0; color: #d35400; text-align: center; } /* Tiêu đề màu cam đất */
+
+button {
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    width: 100%;
+    margin-bottom: 5px;
+    transition: transform 0.1s, filter 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+button:active { transform: translateY(0); }
+
+/* Màu nút - Tươi sáng hơn */
+.btn-reset { background-color: #27ae60; }
+.bfs { background-color: #2980b9; }
+.dfs { background-color: #e67e22; }
+.compare { background-color: #8e44ad; }
+.btn-matrix { background-color: #16a085; margin-top: 10px; }
+
+/* Chú thích */
+.legend {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 5px;
+    border: 1px solid #eee;
+}
+.legend h4 { margin: 0 0 10px 0; color: #7f8c8d; font-size: 14px; }
+.item { display: flex; align-items: center; margin: 5px 0; font-size: 13px; color: #34495e; }
+.box { 
+    width: 15px; height: 15px; 
+    margin-right: 10px; 
+    border-radius: 3px; 
+    border: 1px solid #bdc3c7;
+    flex-shrink: 0;
+}
+
+/* KHU VỰC LƯỚI */
+.grids-wrapper { 
+    display: flex; 
+    gap: 20px; 
+    align-items: flex-start;
+}
+
+.grid-box h3 { color: #2980b9; margin: 0 0 10px 0; }
+
+.grid-container {
+    display: grid;
+    gap: 1px;
+    background-color: #bdc3c7; /* Đường kẻ lưới màu xám bạc */
+    border: 3px solid #34495e;
+    justify-content: center;
+    align-content: center;
+    width: 400px;
+    height: 400px;
+    user-select: none;
+}
+
+.cell {
+    width: 100%; 
+    height: 100%;
+    background-color: #ffffff;
+    cursor: default;
+}
+
+.cell.draggable { cursor: grab; }
+.cell.draggable:active { cursor: grabbing; }
+
+.hidden { display: none; }
+
+/* --- CẬP NHẬT MÀU SẮC CHO NỔI BẬT --- */
+
+/* 1. Tường (Xám đậm ngả xanh - nhìn hiện đại) */
+.cell.wall, .box.wall { 
+    background-color: #34495e; 
+    border-color: #34495e; 
+}
+
+/* 2. Điểm đầu (Xanh lá) & Đích (Đỏ) - Tươi hơn */
+.cell.start, .box.start { 
+    background-color: #2ecc71; 
+    box-shadow: 0 0 8px #2ecc71; 
+    z-index: 20;
+}
+.cell.end, .box.end { 
+    background-color: #e74c3c; 
+    box-shadow: 0 0 8px #e74c3c; 
+    z-index: 20;
+}
+
+/* 3. Duyệt BFS (Xanh dương đậm đà hơn - NỔI BẬT) */
+.cell.visited-bfs, .box.visited-bfs { 
+    background-color: #4fc3f7; /* Light Blue 300 - Rất sáng và rõ */
+    animation: pop 0.2s ease-out;
+}
+
+/* 4. Duyệt DFS (Cam đậm đà hơn - NỔI BẬT) */
+.cell.visited-dfs, .box.visited-dfs { 
+    background-color: #ffb74d; /* Orange 300 - Rất sáng và rõ */
+    animation: pop 0.2s ease-out;
+}
+
+/* 5. Đường đi (Vàng Chanh - Cực nổi trên nền xanh/cam) */
+.cell.path, .box.path { 
+    background-color: #ffeb3b; /* Vàng tươi */
+    box-shadow: 0 0 10px #f1c40f; 
+    z-index: 10; 
+    transition: background-color 0.1s;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Input Area */
+textarea {
+    width: 100%; height: 80px;
+    background-color: #fff; 
+    color: #2c3e50;
+    border: 1px solid #bdc3c7; 
+    border-radius: 6px;
+    padding: 10px; box-sizing: border-box;
+    font-family: monospace;
+}
+textarea:focus { outline: 2px solid #3498db; }
